@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Инструкция по созданию сайта на HTML</title>
+  <style>
+    :root {
+      --bg: #f4fbf7;
+      --card: #ffffff;
+      --text: #1d2b24;
+      --muted: #5f6f68;
+      --green: #2f8f5b;
+      --green-dark: #1f6b43;
+      --line: #d8eadf;
+      --soft: #e8f6ee;
+      --code: #14211b;
+      --shadow: 0 12px 30px rgba(31, 107, 67, 0.12);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, #d9f5e5 0, transparent 35%),
+        linear-gradient(180deg, #f7fff9 0%, var(--bg) 100%);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(247, 255, 249, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      color: var(--green-dark);
+    }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: var(--green);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      padding: 9px 12px;
+      border-radius: 999px;
+    }
+
+    .nav-links a:hover {
+      background: var(--soft);
+      color: var(--green-dark);
+    }
+
+    .hero {
+      padding: 72px 0 38px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.7);
+      color: var(--green-dark);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    h1 {
+      margin: 18px 0 16px;
+      font-size: clamp(34px, 6vw, 64px);
+      line-height: 1.04;
+      letter-spacing: -1.8px;
+    }
+
+    .lead {
+      font-size: 19px;
+      color: var(--muted);
+      max-width: 680px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 26px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 14px;
+      padding: 13px 18px;
+      cursor: pointer;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--green-dark);
+      border: 1px solid var(--line);
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .mini-browser {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .browser-top {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 12px;
+      background: #eef8f1;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #92c9a5;
+    }
+
+    .browser-body {
+      padding: 20px;
+    }
+
+    .mock-title {
+      width: 80%;
+      height: 18px;
+      background: var(--green);
+      border-radius: 9px;
+      margin-bottom: 14px;
+    }
+
+    .mock-line {
+      height: 10px;
+      background: #d9eadf;
+      border-radius: 6px;
+      margin: 10px 0;
+    }
+
+    .mock-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .mock-box {
+      min-height: 82px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #def4e6, #b9e0c7);
+      padding: 12px;
+      color: var(--green-dark);
+      font-weight: 800;
+    }
+
+    section {
+      padding: 42px 0;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      font-size: clamp(26px, 4vw, 40px);
+      line-height: 1.12;
+      margin: 0;
+      letter-spacing: -0.7px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin: 8px 0 0;
+      max-width: 760px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: 0 8px 20px rgba(31, 107, 67, 0.07);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: var(--soft);
+      color: var(--green-dark);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 14px;
+      counter-reset: step;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 14px;
+      align-items: start;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 8px 20px rgba(31, 107, 67, 0.06);
+      counter-increment: step;
+    }
+
+    .step::before {
+      content: counter(step);
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: var(--green);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 20px;
+    }
+
+    .step h3 {
+      margin: 0 0 6px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .code-card {
+      background: var(--code);
+      color: #eafff0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid #294539;
+    }
+
+    .code-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: #1f3028;
+      border-bottom: 1px solid #294539;
+      font-weight: 800;
+    }
+
+    .copy-btn {
+      border: 1px solid #527b65;
+      color: #eafff0;
+      background: transparent;
+      border-radius: 10px;
+      padding: 7px 10px;
+      cursor: pointer;
+    }
+
+    pre {
+      margin: 0;
+      padding: 18px;
+      overflow: auto;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    code {
+      font-family: Consolas, Monaco, monospace;
+    }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .check {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .check input {
+      width: 18px;
+      height: 18px;
+      margin-top: 4px;
+      accent-color: var(--green);
+    }
+
+    .publish-box {
+      background: linear-gradient(135deg, #2f8f5b, #1f6b43);
+      color: white;
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .publish-box h2 {
+      color: white;
+    }
+
+    .publish-box p,
+    .publish-box li {
+      color: rgba(255,255,255,0.9);
+    }
+
+    .publish-box ol {
+      margin-bottom: 0;
+    }
+
+    footer {
+      padding: 34px 0;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .top-link {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      background: var(--green);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      box-shadow: var(--shadow);
+    }
+
+    @media (max-width: 850px) {
+      .hero-grid,
+      .cards,
+      .checklist {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+      }
+
+      .hero {
+        padding-top: 38px;
+      }
+    }
+
+    @media print {
+      header, .hero-actions, .copy-btn, .top-link {
+        display: none;
+      }
+
+      body {
+        background: #fff;
+      }
+
+      .card, .step, .hero-card, .publish-box {
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#top">
+        <span class="logo-mark">HTML</span>
+        <span>Инструкция по созданию сайта</span>
+      </a>
+      <nav class="nav-links" aria-label="Главное меню">
+        <a href="#about">О сайте</a>
+        <a href="#steps">Этапы</a>
+        <a href="#code">Код</a>
+        <a href="#checklist">Проверка</a>
+        <a href="#publish">Публикация</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="badge">🌐 Учебный проект по HTML</span>
+          <h1>Как создать простой сайт на HTML</h1>
+          <p class="lead">
+            На этой странице собрана понятная инструкция: от планирования структуры
+            сайта до публикации через GitHub Pages. Сайт можно использовать как
+            продукт индивидуального проекта.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#steps">Начать инструкцию</a>
+            <a class="btn btn-secondary" href="#code">Посмотреть пример кода</a>
+          </div>
+        </div>
+
+        <div class="hero-card" aria-label="Макет веб-страницы">
+          <div class="mini-browser">
+            <div class="browser-top">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <div class="browser-body">
+              <div class="mock-title"></div>
+              <div class="mock-line" style="width: 94%;"></div>
+              <div class="mock-line" style="width: 74%;"></div>
+              <div class="mock-grid">
+                <div class="mock-box">header</div>
+                <div class="mock-box">nav</div>
+                <div class="mock-box">main</div>
+                <div class="mock-box">footer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>Что получится в итоге</h2>
+            <p class="subtitle">
+              Готовый сайт из одного файла <b>index.html</b>, который открывается в браузере
+              и подходит для загрузки на GitHub Pages.
+            </p>
+          </div>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="icon">📄</div>
+            <h3>Структура HTML</h3>
+            <p>На сайте есть шапка, меню, основной блок, разделы, примеры кода и подвал.</p>
+          </article>
+          <article class="card">
+            <div class="icon">🎨</div>
+            <h3>Оформление CSS</h3>
+            <p>Используются цвета, карточки, отступы, адаптивность и аккуратный внешний вид.</p>
+          </article>
+          <article class="card">
+            <div class="icon">🚀</div>
+            <h3>Публикация</h3>
+            <p>Файл можно загрузить в репозиторий GitHub и открыть как сайт через GitHub Pages.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <div class="container">
+        <h2>Этапы создания такого сайта</h2>
+        <p class="subtitle">Делай по порядку — так проще не запутаться.</p>
+
+        <div class="steps" style="margin-top: 20px;">
+          <article class="step">
+            <div>
+              <h3>Определи тему сайта</h3>
+              <p>Например: экология, кибербезопасность, HTML, спорт, учебный проект или личная страница.</p>
+            </div>
+          </article>
+          <article class="step">
+            <div>
+              <h3>Продумай структуру</h3>
+              <p>Запиши разделы сайта: главная, о проекте, инструкция, примеры, контакты.</p>
+            </div>
+          </article>
+          <article class="step">
+            <div>
+              <h3>Создай файл index.html</h3>
+              <p>Именно этот файл браузер открывает первым, когда пользователь заходит на сайт.</p>
+            </div>
+          </article>
+          <article class="step">
+            <div>
+              <h3>Напиши HTML-разметку</h3>
+              <p>Добавь заголовки, абзацы, списки, ссылки, изображения и разделы страницы.</p>
+            </div>
+          </article>
+          <article class="step">
+            <div>
+              <h3>Оформи сайт через CSS</h3>
+              <p>Настрой цвета, размеры текста, отступы, карточки, кнопки и адаптацию под телефон.</p>
+            </div>
+          </article>
+          <article class="step">
+            <div>
+              <h3>Проверь и опубликуй</h3>
+              <p>Открой сайт в браузере, исправь ошибки и загрузи файл на GitHub Pages.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="code">
+      <div class="container">
+        <h2>Минимальный пример HTML-кода</h2>
+        <p class="subtitle">Этот пример показывает основу любой HTML-страницы.</p>
+
+        <div class="code-card" style="margin-top: 20px;">
+          <div class="code-head">
+            <span>index.html</span>
+            <button class="copy-btn" type="button" onclick="copyCode('htmlExample', this)">Копировать</button>
+          </div>
+          <pre><code id="htmlExample">&lt;!DOCTYPE html&gt;
+&lt;html lang="ru"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Мой сайт&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Мой первый сайт&lt;/h1&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;h2&gt;О проекте&lt;/h2&gt;
+    &lt;p&gt;Это пример сайта, созданного на HTML.&lt;/p&gt;
+  &lt;/main&gt;
+
+  &lt;footer&gt;
+    &lt;p&gt;2026 год&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="checklist">
+      <div class="container">
+        <h2>Чек-лист перед публикацией</h2>
+        <p class="subtitle">Отметь пункты перед загрузкой сайта на GitHub Pages.</p>
+
+        <div class="checklist" style="margin-top: 20px;">
+          <label class="check"><input type="checkbox">Файл главной страницы называется <b>index.html</b></label>
+          <label class="check"><input type="checkbox">Сайт открывается двойным кликом в браузере</label>
+          <label class="check"><input type="checkbox">Меню ведёт к нужным разделам страницы</label>
+          <label class="check"><input type="checkbox">Текст читается без ошибок и лишней воды</label>
+          <label class="check"><input type="checkbox">Сайт нормально выглядит на телефоне</label>
+          <label class="check"><input type="checkbox">Нет личных данных, которые нельзя публиковать</label>
+        </div>
+      </div>
+    </section>
+
+    <section id="publish">
+      <div class="container">
+        <div class="publish-box">
+          <h2>Как опубликовать сайт на GitHub Pages</h2>
+          <ol>
+            <li>Создай новый репозиторий на GitHub.</li>
+            <li>Загрузи в него файл <b>index.html</b>.</li>
+            <li>Открой вкладку <b>Settings</b> в репозитории.</li>
+            <li>Перейди в раздел <b>Pages</b>.</li>
+            <li>В пункте <b>Source</b> выбери <b>Deploy from a branch</b>.</li>
+            <li>В пункте <b>Branch</b> выбери <b>main</b> и папку <b>/root</b>, затем сохрани.</li>
+            <li>Через несколько минут GitHub выдаст ссылку на сайт.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><b>Продукт проекта:</b> открытый сайт-инструкция по созданию веб-сайта на HTML.</p>
+      <p>Сайт создан для учебного индивидуального проекта.</p>
+    </div>
+  </footer>
+
+  <a class="top-link" href="#top" aria-label="Наверх">↑</a>
+
+  <script>
+    function copyCode(id, button) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const oldText = button.innerText;
+        button.innerText = "Скопировано";
+        setTimeout(() => button.innerText = oldText, 1400);
+      });
+    }
+  </script>
+</body>
+</html>
